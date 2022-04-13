@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Task_4.Models.User>
+@{
+    ViewBag.Title = "List of Users";
+    
+}
+
+<form id='form1' method="post">
+    <button type="submit" asp-controller="Users" asp-action="Delete">Delete</button>
+    <button type="submit" asp-controller="Users" asp-action="Block">Block</button>
+    <button type="submit" asp-controller="Users" asp-action="UnBlock">UnBlock</button>
+
+    <table class="table table-bordered table-checks">
+        <tr> 
+                 <th><input type="checkbox" name="cb_all"></th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Date Log</th>
+            <th>Date Reg</th>
+           
+        </tr>
+        @foreach (User user in Model)
+        {
+            <tr>
+                   <td><input type="checkbox" class="check" name="selectedUsers" value="@user.Id" /></td>
+                <td>@user.Email</td>
+                <td>@user.UserName</td>
+                <td>@user.Status</td>
+                <td>@user.DateRegistration</td>
+                <td>@user.LastLoginDate</td>
+             
+            </tr>
+        }
+    </table>
+</form>
+<script>
+    var f = document.getElementById('form1');
+
+    f.cb_all.onchange = function (e) {
+        var el = e.target || e.srcElement;
+        var check = el.form.getElementsByClassName('check');
+        for (var i = 0; i < check.length; i++) {
+            if (el.checked) {
+                check[i].checked = true;
+            } else {
+                check[i].checked = false;
+            }
+        }
+    }
+
+</script>
+ <form method="post" asp-controller="Users" asp-action="Logout">
+                              
+                            </form>
